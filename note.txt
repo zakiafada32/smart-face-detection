@@ -1,4 +1,0 @@
-react tilt
-react particles js
-tachyons
-clarifai
