@@ -50,7 +50,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:3001/signin', {
+      fetch(`${process.env.REACT_APP_HOST}/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ class App extends Component {
         .then((response) => response.json())
         .then((data) => {
           if (data && data.id) {
-            fetch(`http://localhost:3001/profile/${data.id}`, {
+            fetch(`${process.env.REACT_APP_HOST}/profile/${data.id}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3001/imageurl', {
+    fetch(`${process.env.REACT_APP_HOST}/imageurl`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch('http://localhost:3001/image', {
+          fetch(`${process.env.REACT_APP_HOST}/image`, {
             method: 'put',
             headers: {
               'Content-Type': 'application/json',
@@ -179,13 +179,17 @@ class App extends Component {
       user,
     } = this.state;
     return (
-      <div className='App'>
-        <Particles className='particles' params={particlesOptions} />
-        <Navigation
-          isSignedIn={isSignedIn}
-          onRouteChange={this.onRouteChange}
-          toggleModal={this.toggleModal}
-        />
+      <div className="App">
+        <Particles className="particles" params={particlesOptions} />
+        <div className="header">
+          <Logo />
+          <Navigation
+            isSignedIn={isSignedIn}
+            onRouteChange={this.onRouteChange}
+            toggleModal={this.toggleModal}
+          />
+        </div>
+
         {isProfileOpen && (
           <Modal>
             <Profile
@@ -198,7 +202,6 @@ class App extends Component {
         )}
         {route === 'home' ? (
           <div>
-            <Logo />
             <Rank
               name={this.state.user.name}
               entries={this.state.user.entries}
