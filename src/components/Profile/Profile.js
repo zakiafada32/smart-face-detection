@@ -28,7 +28,7 @@ class Profile extends Component {
           this.props.loadUser({ ...this.props.user, ...data });
         }
       })
-      .catch(console.log);
+      .catch((err) => console.log(err));
   };
 
   onFormChange = (event) => {

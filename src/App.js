@@ -76,7 +76,7 @@ class App extends Component {
               });
           }
         })
-        .catch(console.log);
+        .catch((err) => console.log(err));
     }
   }
 

@@ -23,7 +23,6 @@ class Signin extends React.Component {
   };
 
   onSubmitSignIn = () => {
-    console.log(process.env.REACT_APP_HOST);
     fetch(`${process.env.REACT_APP_HOST}/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -40,7 +39,7 @@ class Signin extends React.Component {
           this.props.onRouteChange('home');
         }
       })
-      .catch(console.log);
+      .catch((err) => console.log(err));
   };
 
   render() {
